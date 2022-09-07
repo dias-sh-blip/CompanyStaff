@@ -1,0 +1,76 @@
+.table_sort table {
+    border-collapse: collapse;
+}
+
+.table_sort th {
+    color: #ffebcd;
+    background: #008b8b;
+    cursor: pointer;
+}
+
+.table_sort td,
+.table_sort th {
+    width: 150px;
+    height: 40px;
+    text-align: center;
+    border: 2px solid #846868;
+}
+
+.table_sort tbody tr:nth-child(even) {
+    background: #e3e3e3;
+}
+
+th.sorted[data-order="1"],
+th.sorted[data-order="-1"] {
+    position: relative;
+}
+
+th.sorted[data-order="1"]::after,
+th.sorted[data-order="-1"]::after {
+    right: 8px;
+    position: absolute;
+}
+
+th.sorted[data-order="-1"]::after {
+	content: "▼"
+}
+
+th.sorted[data-order="1"]::after {
+	content: "▲"
+}
+
+
+
+/*
+Sorting
+*/
+#myInput {
+  background-position: 10px 12px; /* Расположите значок поиска */
+  width: 100%; /* Полная ширина */
+  font-size: 16px; /* Увеличить размер шрифта */
+  padding: 12px 20px 12px 40px; /* Добавить немного отступов */
+  border: 1px solid #ddd; /* Добавить серую границу */
+  margin-bottom: 12px; /* Добавить некоторое пространство под входом */
+}
+
+.table_sort {
+  border-collapse: collapse; /* Свернуть границы */
+  width: 100%; /* Полная ширина */
+  border: 1px solid #ddd; /* Добавить серую границу */
+  font-size: 18px; /* Увеличить размер шрифта */
+}
+
+.table_sort th, .table_sort td {
+  text-align: left; /* Выравнивание текста по левому краю */
+  padding: 12px; /* Добавить отступ */
+}
+
+.table_sort tr {
+  /* Добавить нижнюю границу для всех строк таблицы */
+  border-bottom: 1px solid #ddd;
+}
+
+.table_sort tr.header, .table_sort tr:hover {
+  /* Добавить серый цвет фона для заголовка таблицы и при наведении курсора мыши */
+  background-color: #f1f1f1;
+}

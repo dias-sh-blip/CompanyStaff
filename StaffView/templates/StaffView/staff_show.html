@@ -1,0 +1,121 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+ 	<link rel="stylesheet" href="{% static 'css/mystyle.css' %}">
+ 	<script src="{% static 'js/sort.js' %}"></script>
+ 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js" ></script>
+</head>
+<body>
+    {% if user.is_authenticated %}
+        <h1>Привет, {{ user.username|default:'Guest' }}</h1>
+
+        <p> Это расширенный поиск по сотрудникам</p>
+        <div>
+      
+        <p>
+            <a href="{% url 'logout' %}">Выйти</a>
+        </p>
+        <div class="form-group">
+            <input type="text" id="myInput" placeholder="Поиск имен..">
+        </div>
+        
+
+        <table class="table_sort">
+        <thead>
+            <tr>
+                <th>Имя</th>
+                <th>Фамилия</th>
+                <th>Отчество</th>
+                <th>Должность</th>
+                <th>Дата принятия на работу</th>
+                <th>Зарплата</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for first in first_level %}
+            <tr>
+                <td>{{first.name}}</td>
+                <td>{{first.surname}}</td>
+                <td>{{first.midname}}</td>
+                <td>{{first.position}}</td>
+                <td>{{first.AceptanceDate}}</td>
+                <td>{{first.pay}}</td>           
+            </tr>
+            {% endfor %}
+            
+            {% for second in second_level %}
+            <tr>
+                <td>{{second.name}}</td>
+                <td>{{second.surname}}</td>
+                <td>{{second.midname}}</td>
+                <td>{{second.position}}</td>
+                <td>{{second.AceptanceDate}}</td>
+                <td>{{second.pay}}</td>           
+            </tr>
+            {% endfor %}
+            
+            {% for third in third_level %}
+            <tr>
+                <td>{{third.name}}</td>
+                <td>{{third.surname}}</td>
+                <td>{{third.midname}}</td>
+                <td>{{third.position}}</td>
+                <td>{{third.AceptanceDate}}</td>
+                <td>{{third.pay}}</td>            
+            </tr>
+            {% endfor %}
+
+            {% for fourth in fourth_level %}
+            <tr>
+                <td>{{fourth.name}}</td>
+                <td>{{fourth.surname}}</td>
+                <td>{{fourth.midname}}</td>
+                <td>{{fourth.position}}</td>
+                <td>{{fourth.AceptanceDate}}</td>
+                <td>{{fourth.pay}}</td>          
+            </tr>
+            {% endfor %}
+
+            {% for fifth in fifth_level %}
+            <tr>
+                <td>{{fifth.name}}</td>
+                <td>{{fifth.surname}}</td>
+                <td>{{fifth.midname}}</td>
+                <td>{{fifth.position}}</td>
+                <td>{{fifth.AceptanceDate}}</td>
+                <td>{{fifth.pay}}</td>           
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <script>
+    $("#myInput").keyup(function () {
+        var value = this.value.toLowerCase().trim();
+        console.log(value);
+        $("table tr").each(function (index) {
+            if (!index) return;
+            $(this).find("td").each(function () {
+                var id = $(this).text().toLowerCase().trim();
+                var not_found = (id.indexOf(value) == -1);
+                $(this).closest('tr').toggle(!not_found);
+                return not_found;
+            });
+        });
+    });
+    </script>
+    </div>
+    {% else %}
+        <p>Чтобы пользоваться этой таблицей вам нужно быть авторизованным пользователем.</p>
+        <p><a href="{% url 'login' %}">Войти</a></p>
+        <p><a href="{% url 'signup' %}">Регистрация</a></p>
+        
+    {% endif %}
+
+	
+    
+</body>
+</html>

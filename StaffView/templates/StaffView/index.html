@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+</head>
+<body>
+	<a href="{% url 'StaffShow' %}">Открыть расширенную страницу</a>
+	<ul>
+		{% for first in first_level %}
+		<li>   
+			<!-- 	Добавляем сотрудников из 1 уровня иерархии -->
+			Имя: {{first.name}}, Фамилия: {{first.surname}}, Должность: {{first.position}}    
+			<ul>
+				{% for second in second_level %}	<!-- 	Если у них есть подчиненные, добавляем сотрудников из 2 уровня иерархии -->
+				{% if  second.had_id  == first.id %}
+				<li>
+					Имя: {{second.name}}, Фамилия: {{second.surname}}, Должность: {{second.position}}
+					<ul>
+					{% for third in third_level %}		<!-- 	Так же добавляем сотрудников из 3 уровня иерархии -->
+					{% if  third.had_id  == second.id %}
+					<li>
+						Имя: {{third.name}}, Фамилия: {{third.surname}}, Должность: {{third.position}}
+						<ul>
+						{% for fourth in fourth_level %}		<!-- 	Так же добавляем сотрудников из 4 уровня иерархии -->
+						{% if  fourth.had_id  == third.id %}
+						<li>
+							Имя: {{fourth.name}}, Фамилия: {{fourth.surname}}, Должность: {{fourth.position}}
+							<ul>
+							{% for fifth in fifth_level %}		<!-- 	Так же добавляем сотрудников из 5 уровня иерархии -->
+							{% if  fifth.had_id  == fourth.id %}
+							<li>
+								Имя: {{fifth.name}}, Фамилия: {{fifth.surname}}, Должность: {{fifth.position}}
+							</li>
+							{% endif %}
+							{% endfor %}
+							</ul>
+						</li>
+						{% endif %}
+						{% endfor %}
+						</ul>
+					</li>
+					{% endif %}
+					{% endfor %}
+					</ul>
+				</li>
+				{% endif %}
+				{% endfor %}
+			</ul>
+		</li>
+		{% endfor %}
+	</ul>
+</body>
+</html>
